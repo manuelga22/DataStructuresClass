@@ -1,4 +1,4 @@
-package Program0101;
+
 import java.util.*;
 // Write  java program that asks the user to enter the x- and y-coordinates
 // of the vertices of a 2D triangle and calculates the area. Use the Heron's formula to calculate
