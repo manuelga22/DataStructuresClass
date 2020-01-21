@@ -1,22 +1,33 @@
-import java.util.Random;
-
 /**
- * Java program that fills an array of 10 numbers with random integers in
- * [0,100) and displays it. The program will calculate the average of the
- * numbers in the array, the minimum, and the maximum and will display them.
- * 
+ * Expand the array in Program0802 to twice its size, after it has been filled with random numbers
+ *  Use java.util.Arrays.copyOF
  */
-public class Prog0802 {
-  public Prog0802() {
+import java.util.*;
+
+public class Prog1101{
+
+  public Prog1101() {
     int[] randomNum = fillArray();
+    System.out.println(" og length " +randomNum.length);
+    randomNum = expandArray(randomNum); //expand the size of the array
+    System.out.println(" new length " +randomNum.length);
+
     System.out.println("average: " + getAverage(randomNum));
     System.out.println("minimum value: " + getMin(randomNum));
     System.out.println("maximum value: " + getMax(randomNum));
   }
 
   /**
+   * twices the size of an array
+   * @return the same array but with twice its size
+   */
+  public int [] expandArray(int [] array){
+     int [] copy = Arrays.copyOf(array, array.length*2);
+     return copy;
+  }
+
+  /**
    * calculates and returns the average of the numbers in the array
-   * 
    * @param array (int)
    * @return the average of the numbers in the array
    */
@@ -30,7 +41,6 @@ public class Prog0802 {
 
   /**
    * returns he min value of an array
-   * 
    * @param array
    * @return
    */
@@ -42,10 +52,8 @@ public class Prog0802 {
     }
     return min;
   }
-
   /**
    * returns the max number of an array
-   * 
    * @param array
    * @return
    */
@@ -60,7 +68,6 @@ public class Prog0802 {
 
   /**
    * method returns an array with 10 random numbers from [0-100)
-   * 
    * @return a random array with 10 random numbers
    */
   public int[] fillArray() {
@@ -73,10 +80,11 @@ public class Prog0802 {
 
     return randomArray;
   }
-
-  public static void main(String args[]) {
-
-    new Prog0802();
-
+  public static void main(String[]args){
+    new Prog1101();
   }
+
+
+
+
 }
