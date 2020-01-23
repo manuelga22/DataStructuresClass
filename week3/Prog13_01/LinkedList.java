@@ -37,6 +37,15 @@ public class LinkedList implements ListInterface {
     public boolean isEmpty() {
         return (first.getNext() == null);
     }
+    public int length(){
+       int length = 0;
+       Node current = first;
+       while(current != null){
+         length++;
+         current = current.getNext();
+       }
+       return length;
+    }
 
     public void display() {
         Node current = first.getNext();
@@ -92,10 +101,47 @@ public class LinkedList implements ListInterface {
     }
 
     public void insert(int x, int loc) {
+        if(loc >= length() ){
+
+          System.out.println("location not found");
+
+        }else{
+
+        Node node = new Node();
+        node.setInfo(x);
+       
+        int counter = 1;
+        Node current = first;
+
+        while(current.next != null){
+           if(counter == loc){
+             node.next = current.getNext();
+             current.next = node;
+           }
+           
+           current = current.getNext();
+           counter++;
+        }
+       }
 
     }
 
     public void removeItemAt(int loc) {
+        if(loc >= length()){
+            System.out.println("location not found");
+        }else{
 
+        Node current = first ; 
+        int counter=1;
+
+        while(current.next != null){
+            if(loc ==counter){
+             current.setNext(current.getNext().getNext());
+            }
+            current =current.getNext();
+            counter++;
+        }
+      }
+         
     }
 }

@@ -15,7 +15,8 @@ public class Prog1301{
    for(int a=1;a<10;a++){
      list.add(a);
    }
-   System.out.println(list.display());
+
+   list.display();
    
 
    
