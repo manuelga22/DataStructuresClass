@@ -1,6 +1,6 @@
 public class Prog15_01
 {
-
+    
     public static void main(String[] args)
     {
         Stack s = new Stack();

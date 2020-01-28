@@ -1,3 +1,4 @@
+import java.util.*;
 public class Stack
 {
     public Stack()
@@ -6,25 +7,21 @@ public class Stack
         list = new char[size];
         top = 0;
     }
-
     public Stack(int s)
     {
         size = s;
         list = new char[size];
         top = 0;
     }
-
     public void push(char c)
     {
-        if(!isFull()){
-            list[top]=c;
-            top++;
-
-        }else{
-            System.out.println("Stack is full");
+        if(isFull()){
+          size= size*2;
+          list = Arrays.copyOf(list, size*2);  
         }
+        list[top]=c;
+        top++;
     }
-
     public void pop()
     {
         if(!isEmpty())top--;
@@ -37,9 +34,7 @@ public class Stack
         else{
             System.out.println("stack is empty");
             return ' ';
-        }
-
-       
+        }   
     }
 
     public boolean isEmpty()
