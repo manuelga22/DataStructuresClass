@@ -16,18 +16,30 @@ public class Stack
 
     public void push(char c)
     {
-        list[top] = c;
-        top++;
+        if(!isFull()){
+            list[top]=c;
+            top++;
+
+        }else{
+            System.out.println("Stack is full");
+        }
     }
 
     public void pop()
     {
-        top--;
+        if(!isEmpty())top--;
+        else System.out.println("Stack is empty");
     }
 
     public char peek()
     {
-        return list[top - 1];
+        if(!isEmpty()) return list[top - 1];
+        else{
+            System.out.println("stack is empty");
+            return ' ';
+        }
+
+       
     }
 
     public boolean isEmpty()
