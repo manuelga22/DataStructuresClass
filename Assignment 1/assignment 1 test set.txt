@@ -1,0 +1,25 @@
+IS_EMPTY
+ADD Cabbage
+ADD Cucumber
+ADD Broccoli
+COUNT Cucumber
+ADD Banana
+ADD Broccoli
+ADD Guava
+REMOVE Cucumber
+REMOVE Cucumber
+REMOVE Cabbage
+ADD Guava
+REMOVE Coconut
+ADD Guava
+COUNT Guava
+REMOVE Banana
+REMOVE Guava
+ADD Orange
+COUNT Banana
+REMOVE Orange
+ADD Broccoli
+IS_EMPTY
+REMOVE Broccoli
+IS_EMPTY
+REMOVE Broccoli
