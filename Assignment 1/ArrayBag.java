@@ -79,10 +79,10 @@ public class ArrayBag
         for(int a = length-1; a>=0 ; a--){// loop to check for all the ocurrences of the element
 
            if(bag[a].equals(s) ){
-                bag[a] = bag[length-1];
-                bag = Arrays.copyOfRange(bag,0, length-1);
-                bag = Arrays.copyOf(bag, SIZE);
-                length--; 
+                bag[a] = bag[length-1];// replace the value being removed by a different one
+                bag = Arrays.copyOfRange(bag,0, length-1);// copy the bag without the last value which is extra
+                bag = Arrays.copyOf(bag, SIZE); //restore the bag's original size
+                length--; // length-1 because we just removed one element
            }
 
         }
