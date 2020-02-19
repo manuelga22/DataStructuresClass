@@ -11,6 +11,7 @@ public static void fillArray(int[]list){
   }
 }
 
+
 public static int minimum(int[]list, int pos1, int length){
    int min = list[pos1];
    for(int a = pos1+1; a<length; a++){
@@ -20,14 +21,45 @@ public static int minimum(int[]list, int pos1, int length){
    }
    return min;
 }
-
 public static void selectionSort(int[]list){
   for(int a = 0; a<list.length; a++){
-     int minPos(list, a, list.length-1);
-     swap(list, a , minPos);
-   
+     int minPos =  minimum(list, a, list.length-1);
+     swap(list, a , minPos);  
   }
 }
+
+public static void mergeSort(int [] list, int[] list2, int [] list3){
+  int bPtr = 0;
+  int ePtr = 0;
+  int i = 0;
+  while(bPtr != list.length && ePtr != list2.length ){
+     if(list[bPtr]< list2[ePtr]){
+         list3[i] = list[bPtr];
+         bPtr++;
+     }
+     else{
+       list3[i] = list2[ePtr];
+       ePtr++;
+     }
+     i++;
+  }
+  if(bPtr == list.length){
+    while(ePtr != list2.length){
+      list3[i] = list2[ePtr];
+      ePtr++;
+      i++;
+    }
+  } 
+  if(ePtr == list2.length){
+    while(bPtr != list.length){
+      list3[i] = list[bPtr];
+      bPtr++;
+      i++;
+    }
+  }
+  
+}
+
 
 public static void insertionSort(int[] list){  
   for(int a = 1 ; a< list.length;a++){
