@@ -1,4 +1,4 @@
-package week7;
+package Searching;
 import java.util.Random;
 
 public class SortingAlgorithms2 {
@@ -24,7 +24,7 @@ public class SortingAlgorithms2 {
   public static void selectionSort(int[] list) {
     for (int a = 0; a < list.length; a++) {
       int minPos = minimum(list, a, list.length - 1);
-      swap(list, a, minPos);
+      // swap(list, a, minPos);
     }
   }
 
