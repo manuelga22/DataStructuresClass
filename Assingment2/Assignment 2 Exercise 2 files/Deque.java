@@ -1,39 +1,24 @@
 
-import java.util.Arrays;
-
-
 /**
- * The class Deque implements an array-based double-ended queue.
+ * The class Deque implements a double-ended queue with a doubly linked list.
+ * The list uses a header and a trailer (dummy) nodes.
  *
- * @author 6142955
+ * @author (add here your Panther ID)
  */
 public class Deque
 {
-    private int SIZE, back, front, count;
-    private []int  list;
 
     /**
-     * Default constructor. Initial deque capacity is 10.
+     * Default constructor. Sets this object as an empty deque.
+     *
      */
     public Deque()
     {
-        SIZE = 10;
-        list = new int[SIZE];
-        back = 0;
-        front = SIZE;  
-        count = 0;  
-    }
-
-    /**
-     * Parameterized constructor. Initial deque capacity is "size".
-     */
-    public Deque(int size)
-    {
-         SIZE = size;
-         list = new int[SIZE];
-         back = 0;
-         front = 0;  
-         count = 0;  
+        front = new Node();
+        back = new Node();
+        front.setNext(back);
+        back.setPrev(front);
+        count = 0;
     }
 
     /**
@@ -41,19 +26,17 @@ public class Deque
      * time.
      *
      * @param x new element to be added to the deque.
-     * @return false if addition cannot be performed (i.e. the deque is full),
-     * true otherwise
      */
-    public boolean addToBack(int x)
+    public void addToBack(int x)
     {
-        if(back==front){
-            return false;
+        Node newNode = new Node(x);
+        if(isEmpty()){
+            back = newNode;
         }else{
-            count++;
-             list[back] = x;
-             back++;
-             return true;
+            front.setPrev(newNode);
         }
+        newNode.setNext(front);
+        front = newNode;
     }
 
     /**
@@ -61,19 +44,18 @@ public class Deque
      * time.
      *
      * @param x new element to be added to the deque.
-     * @return false if addition cannot be performed (i.e. the deque is full),
-     * true otherwise
      */
-    public boolean addToFront(int x)
+    public void addToFront(int x)
     {
-        if(back==front){   
-            return false;
+        Node newNode = new Node(x);
+        if(isEmpty()){
+            head = newNode;
         }else{
-            count++;
-           list[front] = x;
-           front--;
-           return true;
+            back.setNext(x)
+            newNode.setPrev(back)
         }
+        newNode.setNext(front);
+        back = newNode;
     }
 
     /**
@@ -86,7 +68,7 @@ public class Deque
      */
     public DequeItem getBack()
     {
-        if(isEmpty()){
+            if(isEmpty()){
             return new DequeItem();
         }else{
             return new DequeItem(true, list[back]);
@@ -103,7 +85,7 @@ public class Deque
      */
     public DequeItem getFront()
     {
-          if(isEmpty()){
+            if(isEmpty()){
             return new DequeItem();
         }else{
             return new DequeItem(true, list[front]);
@@ -117,24 +99,7 @@ public class Deque
      */
     public boolean isEmpty()
     {
-        if(count >0){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    /**
-     * Determines if deque is full. The method takes O(1) time.
-     *
-     * @return true if deque has reached maximum capacity, false otherwise.
-     */
-    public boolean isFull()
-    {
-       if(front == back){
-           return true;
-       }
-       return false;
+        return front==null;   //DUMMY CODE; TO IMPLEMENT
     }
 
     /**
@@ -145,10 +110,18 @@ public class Deque
      */
     public boolean removeBack()
     {
-        if(back <=0){
+         if(front == null){
+            System.out.println("Deque is empty")
             return false;
-        }
-        list[back]= "X";
+         }
+  
+         if(front.getNext() == null){
+          back = null;
+         }else{
+      
+        head.getNext().setPrev(null)
+       }
+        back = back.prev;
         return true;
     }
 
@@ -161,10 +134,18 @@ public class Deque
      */
     public boolean removeFront()
     {
-        if(front == SIZE){
+          if(back == null){
+            System.out.println("Deque is empty")
             return false;
-        }
-        list[front]="X";
+         }
+      
+         if(front.getNext() == null){
+          head = null;
+         }else{
+      
+        back.prev.next = null;
+       }
+        tail = tail.prev;
         return true;
     }
 
@@ -175,20 +156,22 @@ public class Deque
      */
     public String toString()
     {
-        String[] stringArray = new String[list.length];
-        Arrays.fill(stringArray, "X");
-        
-        for (int i = 0; i < count; i++)
+        String str = "";
+
+        Node current = front.getNext();
+        for (int i = 0; i < count - 1; i++)
         {
-            stringArray[(front + i) % SIZE] = Integer.toString(list[(front + i) % SIZE]);
+            str += current.getInfo() + ", ";
+            current = current.getNext();
         }
 
-        return Arrays.toString(stringArray);
+        if (count != 0)
+            return "Deque: [" + str + back.getPrev().getInfo() + "]";
+        else
+            return "Deque: []";
     }
 
-    private int back;   //points to the last element of the deque
     private int count;  //number of elements in the deque
-    private int front;  //points to the first element of the deque
-    private int[] list; //array that stores the deque elements
-    private int SIZE;   //deque capacity
+    private Node back;  //points to the item in the back
+    private Node front; //points to the item in the front
 }
