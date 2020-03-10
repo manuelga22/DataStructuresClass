@@ -3,7 +3,7 @@
  * The class Deque implements a double-ended queue with a doubly linked list.
  * The list uses a header and a trailer (dummy) nodes.
  *
- * @author (add here your Panther ID)
+ * @author (6142955)
  */
 public class Deque
 {
@@ -29,16 +29,21 @@ public class Deque
      */
     public void addToBack(int x)
     {
-        Node newNode = new Node(x);
-        if(isEmpty()){
-            back = newNode;
-        }else{
-            front.setPrev(newNode);
-        }
-        newNode.setNext(front);
-        front = newNode;
+          Node newNode = new Node();
+          newNode.setInfo(x);          
+         if (isEmpty()) {
+             back.setPrev(newNode);
+             newNode.setNext(back);
+             front.setNext(newNode);
+         } else {
+             Node current_back = back.getPrev();          
+             back.setPrev(newNode);
+             newNode.setPrev(current_back);
+             newNode.setNext(back);
+             current_back.setNext(newNode);
+         }
+        count++;  
     }
-
     /**
      * Adds new element to the front end of the deque. The method takes O(1)
      * time.
@@ -47,15 +52,20 @@ public class Deque
      */
     public void addToFront(int x)
     {
-        Node newNode = new Node(x);
-        if(isEmpty()){
-            head = newNode;
-        }else{
-            back.setNext(x)
-            newNode.setPrev(back)
+         Node newNode = new Node();
+         newNode.setInfo(x);   
+         if (isEmpty()) {
+             front.setNext(newNode);
+             newNode.setNext(back);
+             back.setPrev(newNode);    
+        } else {
+             Node current_front = front.getNext();
+             front.setNext(newNode);
+             newNode.setNext(current_front);
+             newNode.setPrev(front);
+             current_front.setPrev(newNode);
         }
-        newNode.setNext(front);
-        back = newNode;
+        count++;  
     }
 
     /**
@@ -68,10 +78,10 @@ public class Deque
      */
     public DequeItem getBack()
     {
-            if(isEmpty()){
+                   if(isEmpty()){
             return new DequeItem();
         }else{
-            return new DequeItem(true, list[back]);
+            return new DequeItem(true, back.getPrev().getInfo());
         }
     }
 
@@ -85,10 +95,10 @@ public class Deque
      */
     public DequeItem getFront()
     {
-            if(isEmpty()){
+                    if(isEmpty()){
             return new DequeItem();
         }else{
-            return new DequeItem(true, list[front]);
+            return new DequeItem(true, front.getNext().getInfo());
         }
     }
 
@@ -99,7 +109,7 @@ public class Deque
      */
     public boolean isEmpty()
     {
-        return front==null;   //DUMMY CODE; TO IMPLEMENT
+      return count ==0;
     }
 
     /**
@@ -110,21 +120,20 @@ public class Deque
      */
     public boolean removeBack()
     {
-         if(front == null){
-            System.out.println("Deque is empty")
-            return false;
-         }
-  
-         if(front.getNext() == null){
-          back = null;
-         }else{
+         if(isEmpty())return false;   
+         
+         Node old = back.getPrev();
       
-        head.getNext().setPrev(null)
-       }
-        back = back.prev;
-        return true;
+         
+         old.getPrev().setNext(back);
+           
+         back.setPrev(back.getPrev().getPrev());
+         
+         old=null;
+         count--;
+       
+         return true;
     }
-
     /**
      * Removes element on the front end of the deque. The method takes O(1)
      * time.
@@ -134,19 +143,19 @@ public class Deque
      */
     public boolean removeFront()
     {
-          if(back == null){
-            System.out.println("Deque is empty")
-            return false;
-         }
-      
-         if(front.getNext() == null){
-          head = null;
-         }else{
-      
-        back.prev.next = null;
-       }
-        tail = tail.prev;
-        return true;
+          if(isEmpty())return false;
+          
+           Node old = front.getNext();
+
+         old.getNext().setPrev(front);
+           
+         front.setNext(front.getNext().getNext());
+         
+         old=null;
+         count--;
+          
+         
+         return true;
     }
 
     /**
