@@ -119,6 +119,11 @@ public class BinarySearchTree
             return getMin(p.getLeftChild());
     }
     public String toString() {
-       
+       return toString(root.getLeftChild());
+    }
+    public String toString(Node p){
+        if(p != null){
+            return toString(p.getLeftChild())+ p.getInfo()+ " "+ toString(p.getRightChild());
+        }else return " ";
     }
 }

@@ -10,9 +10,10 @@ public class Main{
     int random = rand.nextInt(100);
     tree.add(random);
   }
-
+  System.out.println(tree.toString());
+  System.out.println("++++++");
   tree.postoderDisplay();
-
+  
 
  }
 
