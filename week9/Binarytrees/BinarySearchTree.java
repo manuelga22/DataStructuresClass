@@ -92,6 +92,17 @@ public class BinarySearchTree
             return search(x, p.getRightChild());
     }
 
+    public int getHeight(){
+        return getHeight(root);
+    }
+    private int getHeight(Node p){
+        if(p==null){
+            return -1;
+        }else{
+            return 1+ Math.max(getHeight(p.getLeftChild()), getHeight(p.getRightChild()));
+        }
+    }
+
     private void insert(int x, Node p)
     {
         if (x < p.getInfo())
