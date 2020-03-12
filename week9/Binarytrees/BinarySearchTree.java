@@ -102,6 +102,31 @@ public class BinarySearchTree
             return 1+ Math.max(getHeight(p.getLeftChild()), getHeight(p.getRightChild()));
         }
     }
+    public int getCount(){
+        return getCount(root.getLeftChild());
+    }
+    private int getCount(Node p){
+         if(p==null){
+             return 0;
+         }else{
+           return 1+getCount(p.getLeftChild())+getCount(p.getRightChild());
+         }
+    }
+
+    public int count(int num){
+        return count(root.getLeftChild(),num);
+    }
+    private int count(Node p , int num){
+        if(p==null){
+            return 0;
+        }else if(p.getInfo() < num){
+           return count(p.getLeftChild(),num);
+        }else if (p.getInfo() > num){
+            return count(p.getLeftChild(),num);
+        }else{
+            return 1+count(p.getRightChild(), num);
+        }
+    }
 
     private void insert(int x, Node p)
     {
