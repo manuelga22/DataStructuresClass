@@ -1,10 +1,84 @@
 package Binarytrees;
-
 /**
  * @author A. Hernandez Data Structures and Algorithms
  */
 public class BinarySearchTree
 {
+    public class Queue{
+        public Queue()
+        {
+            size = 100;
+            list = new Node[size];
+    
+            front = 0;
+            back = size - 1;
+    
+            count = 0;
+        }
+    
+        public Queue(int s)
+        {
+            size = s;
+            list = new Node[size];
+    
+            front = 0;
+            back = size - 1;
+    
+            count = 0;
+        }
+    
+        public void enqueue(Node c)
+        {   if(count < size){
+              back = (back + 1) % size;
+              list[back] = c; 
+              count++;
+            }else{
+                System.out.println("Queue is full");
+            }
+        }
+    
+        public void dequeue()
+        {
+            if(!isEmpty()){
+                front = (front + 1) % size;
+                count--;
+            }else System.out.println("Queue is empty");
+            
+        }
+    
+        public Node getFront()
+        {   if(count >= 0){
+              return list[front];
+            }else{
+                System.out.println("list is empy");
+            }
+            return root;
+        }
+      
+        public void printQueue(){
+           
+           for(int i = 0;i<count;i++){
+            System.out.println(list[(front+1)%size]);
+           }
+        }
+    
+        public void clear(){
+            front =0;
+            back= size-1;
+            count =0;
+        }
+    
+        public boolean isEmpty()
+        {
+            return count == 0;
+        }
+    
+        private Node[] list;
+        private int size;
+        private int count;
+        private int front, back;
+    }
+    
     public BinarySearchTree()
     {
         root = new Node();        //dummy node as the root
@@ -23,7 +97,27 @@ public class BinarySearchTree
         inorderDisplay(root.getLeftChild());
         System.out.println();
     }
+    public void printLevels(){
+        Queue q = new  Queue();
 
+        if(root.getLeftChild() != null){
+            q.enqueue(root.getLeftChild());
+            while(!q.isEmpty()){
+                Node p = q.getFront();
+                q.dequeue();
+
+                System.out.print(p.getInfo()+" ");
+                if(p.getLeftChild() != null){
+                    q.enqueue(p.getLeftChild());
+
+                }
+                if(p.getRightChild() != null){
+                    q.enqueue(p.getRightChild());
+                }
+            }
+            System.out.println();
+        }
+    }
     public boolean contains(int x)
     {
         return search(x, root.getLeftChild());

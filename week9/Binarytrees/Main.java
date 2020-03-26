@@ -16,6 +16,8 @@ public class Main{
 
   System.out.println(tree.getCount());
   System.out.println(tree.count(1));
+  System.out.println("printing levels: ");
+  tree.printLevels();
 
  }
 
